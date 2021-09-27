@@ -14,8 +14,15 @@ class CreateInternalsTable extends Migration
     public function up()
     {
         Schema::create('internals', function (Blueprint $table) {
-            $table->id();
-            $table->string('slug');
+            $table->bigIncrements('id_usulan');
+            $table->string('judul_usulan');
+            $table->foreignId('id_skema')->nullable();
+            $table->foreignId('id_users')->nullable();
+            $table->longText('abstrak')->nullable();
+            $table->string('url_usulan')->nullable();
+            $table->integer('id_dosen')->nullable();
+            $table->string('status_usulan');
+            $table->text('type');
             $table->timestamps();
         });
     }

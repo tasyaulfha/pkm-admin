@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\InternalController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
 ->name('dashboard');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Auth::routes();
 
 Route::prefix('admin')
@@ -25,16 +27,21 @@ Route::prefix('admin')
     ->group(function(){
         Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
         ->name('dashboard');
-     Route::resource('usulan', 'UsulanController');
      Route::resource('skema', 'SkemaController');
      Route::resource('dosen', 'DosenController');
+     Route::resource('internal', 'InternalController');
+     Route::get('/internal', [InternalController::class, 'index'])->name('internal.index');
+
+     Route::get('/usulan/internal/show', [InternalController::class, 'show'])->name('usulan.internal.show');
+     Route::get('/usulan/internal/destroy', [InternalController::class, 'destroy'])->name('usulan.internal.destroy');
+
+
+
+
+
      Route::get('/exportdosen',[App\Http\Controllers\Admin\DosenController::class, 'dosenexport' ])->name('exportdosen');
      Route::post('/importdosen',[App\Http\Controllers\Admin\DosenController::class, 'dosenimport' ])->name('importdosen');
 
     });
 
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

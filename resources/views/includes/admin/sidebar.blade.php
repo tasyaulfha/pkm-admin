@@ -33,9 +33,9 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ route('usulan.index') }}">Seleksi Internal</a>
-                            <a class="collapse-item" href="{{ route('usulan.index') }}">PKM CAMP</a>
-                            <a class="collapse-item" href="{{ route('usulan.index') }}">PKM Idea Challange</a>
+                            <a class="collapse-item" href="{{ route('internal.index') }}">Seleksi Internal</a>
+                            <a class="collapse-item" href="{{ route('internal.index') }}">PKM CAMP</a>
+                            <a class="collapse-item" href="{{ route('internal.index') }}">PKM Idea Challange</a>
                         </div>
                     </div>
                 </li>

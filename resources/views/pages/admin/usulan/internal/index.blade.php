@@ -8,9 +8,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Seleksi Internal</h1>
-        <a href="{{route('usulan.create')}}" class="btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-plus fa-sm text-white-50"></i>Tambah Data
-        </a>
+       
     </div>
 
 
@@ -24,22 +22,42 @@
                             <th>Jenis</th>
                             <th>Ketua</th>
                             <th>Judul</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Submit</th>
                             <th>Status</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse ($items as $item )
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-
+                            <td>{{ $item->id_usulan}}</td>
+                            <td>{{ $item->type}}</td>
+                            <td>{{ $item->user->name}}</td>
+                            <td>{{ $item->judul_usulan }}</td>
+                            <td>{{ date('d-m-Y', strtotime($item->created_at))}}</td>
+                            <td>{{ $item->status_usulan }}</td>
+                            <td>
+                            <a href="{{route('usulan.internal.show', $item->id)}}" class="btn btn-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <form action="{{route('usulan.internal.destroy', $item->id)}}" method="post"
+                                     class="d-inline">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                                
                         </tr>
+                        @empty
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                Data Kosong
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -51,3 +69,6 @@
 
 
 @endsection
+
+
+

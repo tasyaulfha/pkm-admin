@@ -18,7 +18,7 @@ class CreateDosensTable extends Migration
             $table->integer('nidn_dosen')->nullable();
             $table->string('nama_dosen')->nullable();
             $table->string('no_hp')->nullable();
-            $table->string('slug');
+            $table->string('slug')->nullable();
 
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

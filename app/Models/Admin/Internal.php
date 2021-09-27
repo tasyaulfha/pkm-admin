@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ class Internal extends Model
     
     protected $fillable =[
         'id' ,
-        'id_user' ,
+        'id_users' ,
         'nim_mhs',
         'judul_usulan',
         'id_skema',
@@ -32,7 +32,7 @@ class Internal extends Model
         return $this->belongsTo(Dosen::class, 'id_skema','id');
     }
     public function user(){
-        return $this->belongsTo(Dosen::class, 'id_user','id');
+        return $this->belongsTo(Dosen::class, 'id_users','id');
     }
 
 }
