@@ -16,6 +16,10 @@ class InternalDetail extends Model
        public function internal(){
            return $this->belongsTo(Internal::class, 'id_internal','id');
        }
+       public function usulanMahasiswas()
+       {
+           return $this->hasMany(UsulanMahasiswa::class, 'id_usulan');
+       }
        
       
 

@@ -30,9 +30,12 @@ Route::prefix('admin')
      Route::resource('skema', 'SkemaController');
      Route::resource('dosen', 'DosenController');
      Route::resource('internal', 'InternalController');
+     Route::resource('idea', 'IdeaController');
+     Route::resource('camp', 'CampController');
+
      Route::get('/internal', [InternalController::class, 'index'])->name('internal.index');
 
-     Route::get('/usulan/internal/show', [InternalController::class, 'show'])->name('usulan.internal.show');
+    Route::get('/usulan/internal/show/{id}', [InternalController::class, 'show'])->name('usulan.internal.show');
      Route::get('/usulan/internal/destroy', [InternalController::class, 'destroy'])->name('usulan.internal.destroy');
 
 

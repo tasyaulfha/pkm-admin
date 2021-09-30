@@ -6,18 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InternalRequest;
 use App\Models\User;
 use App\Models\Admin\Usulan;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
 
 
-class InternalController extends Controller
+class CampController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * 
      */
     public function __construct()
     {
@@ -26,12 +24,10 @@ class InternalController extends Controller
     
     public function index()
     {
-      
         $items=Usulan::all();
-
-        return view('pages.admin.usulan.internal.index',
-           compact('items')
-        );
+        return view('pages.admin.usulan.camp.index',[
+            'items' => $items
+        ]);
        
     }
 
@@ -57,7 +53,7 @@ class InternalController extends Controller
         $data['slug'] =Str::slug($request->title);
        
         Usulan::create($data);
-        return redirect()->route('internal.index');    
+        return redirect()->route('camp.index');    
 
     }
 
@@ -73,7 +69,7 @@ class InternalController extends Controller
             'details', 'user'
         ])->findOrFail($id);
         
-        return view('pages.admin.usulan.internal.detail',[
+        return view('pages.admin.usulan.camp.detail',[
             'item' => $item
         ]);
     }
@@ -99,7 +95,7 @@ class InternalController extends Controller
         $item=Usulan::findOrFail($id);
         $item->update($data);
        
-        return redirect()->route('pages.admin.usulan.internal.index');  
+        return redirect()->route('pages.admin.usulan.camp.index');  
     }
 
     /**
@@ -113,7 +109,7 @@ class InternalController extends Controller
         $item=Usulan::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('internal.index');  
+        return redirect()->route('camp.index');  
 
     }
 }

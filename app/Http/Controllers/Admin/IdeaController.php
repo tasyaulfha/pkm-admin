@@ -6,18 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InternalRequest;
 use App\Models\User;
 use App\Models\Admin\Usulan;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
 
 
-class InternalController extends Controller
+class IdeaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * 
      */
     public function __construct()
     {
@@ -26,12 +24,10 @@ class InternalController extends Controller
     
     public function index()
     {
-      
         $items=Usulan::all();
-
-        return view('pages.admin.usulan.internal.index',
-           compact('items')
-        );
+        return view('pages.admin.usulan.idea.index',[
+            'items' => $items
+        ]);
        
     }
 
