@@ -10,7 +10,7 @@ class Dosen extends Model
     use HasFactory;
 
     protected $table = "dosens";
-    protected  $primaryKey="id";
+    protected  $primaryKey="nidn_dosen";
         
     protected $fillable= [
         'nidn_dosen',
@@ -23,4 +23,8 @@ class Dosen extends Model
     protected $hidden= [
         
     ];
+
+    public function usulan(){
+        return $this->hasMany(Usulan::class, 'id_usulan');
+    }
 }

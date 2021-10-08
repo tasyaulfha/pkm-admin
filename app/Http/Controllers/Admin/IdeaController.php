@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\InternalRequest;
+use App\Http\Requests\Admin\IdeaRequest;
 use App\Models\User;
 use App\Models\Admin\Usulan;
-
 use Illuminate\Support\Str;
+
 
 
 class IdeaController extends Controller
@@ -24,11 +24,13 @@ class IdeaController extends Controller
     
     public function index()
     {
-        $items=Usulan::all();
-        return view('pages.admin.usulan.idea.index',[
-            'items' => $items
-        ]);
-       
+      
+        $items=Usulan::with([
+            'details', 'user'
+        ])->get();
+         
+        return view('pages.admin.usulan.idea.index',compact('items'))
+        ->with('no',1);
     }
 
     /**
@@ -47,13 +49,13 @@ class IdeaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InternalRequest $request)
+    public function store(IdeaRequest $request)
     {
         $data = $request->all();
         $data['slug'] =Str::slug($request->title);
        
         Usulan::create($data);
-        return redirect()->route('internal.index');    
+        return redirect()->route('idea.index');    
 
     }
 
@@ -69,7 +71,7 @@ class IdeaController extends Controller
             'details', 'user'
         ])->findOrFail($id);
         
-        return view('pages.admin.usulan.internal.detail',[
+        return view('pages.admin.usulan.idea.detail',[
             'item' => $item
         ]);
     }
@@ -80,6 +82,14 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function edit($id)
+    {
+        $item = Usulan::findOrFail($id);
+
+        return view('pages.admin.usulan.idea.edit', [
+            'item' => $item
+        ]);
+    }
    
     /**
      * Update the specified resource in storage.
@@ -88,14 +98,14 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InternalRequest $request, $id)
+    public function update(IdeaRequest $request, $id)
     {
         $data = $request->all();
 
         $item=Usulan::findOrFail($id);
         $item->update($data);
        
-        return redirect()->route('pages.admin.usulan.internal.index');  
+        return redirect()->route('pages.admin.usulan.idea.index');  
     }
 
     /**
@@ -109,7 +119,7 @@ class IdeaController extends Controller
         $item=Usulan::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('internal.index');  
+        return redirect()->route('idea.index');  
 
     }
 }

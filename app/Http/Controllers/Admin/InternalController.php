@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InternalRequest;
-use App\Models\User;
 use App\Models\Admin\Usulan;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,16 +22,16 @@ class InternalController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
-      
-        $items=Usulan::all();
 
-        return view('pages.admin.usulan.internal.index',
-           compact('items')
-        );
-       
+        $items = Usulan::with([
+            'details', 'user'
+        ])->get();
+
+        return view('pages.admin.usulan.internal.index', compact('items'))
+            ->with('no', 1);
     }
 
     /**
@@ -42,7 +41,16 @@ class InternalController extends Controller
      */
     public function create()
     {
-       //
+        //
+    }
+
+    public function edit($id)
+    {
+        $item = Usulan::findOrFail($id);
+
+        return view('pages.admin.usulan.internal.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -54,11 +62,10 @@ class InternalController extends Controller
     public function store(InternalRequest $request)
     {
         $data = $request->all();
-        $data['slug'] =Str::slug($request->title);
-       
-        Usulan::create($data);
-        return redirect()->route('internal.index');    
+        $data['slug'] = Str::slug($request->title);
 
+        Usulan::create($data);
+        return redirect()->route('internal.index');
     }
 
     /**
@@ -70,10 +77,10 @@ class InternalController extends Controller
     public function show($id)
     {
         $item = Usulan::with([
-            'details', 'user'
+            'details', 'user', 'dosen', 'rekening', 'usulanMahasiswa'
         ])->findOrFail($id);
-        
-        return view('pages.admin.usulan.internal.detail',[
+
+        return view('pages.admin.usulan.internal.detail', [
             'item' => $item
         ]);
     }
@@ -84,7 +91,7 @@ class InternalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   
+
     /**
      * Update the specified resource in storage.
      *
@@ -96,10 +103,10 @@ class InternalController extends Controller
     {
         $data = $request->all();
 
-        $item=Usulan::findOrFail($id);
+        $item = Usulan::findOrFail($id);
         $item->update($data);
-       
-        return redirect()->route('pages.admin.usulan.internal.index');  
+
+        return redirect()->route('internal.index');
     }
 
     /**
@@ -110,10 +117,9 @@ class InternalController extends Controller
      */
     public function destroy($id)
     {
-        $item=Usulan::findOrFail($id);
+        $item = Usulan::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('internal.index');  
-
+        return redirect()->route('internal.index');
     }
 }

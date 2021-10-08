@@ -29,7 +29,21 @@ class Usulan extends Model
     }
 
     public function details(){
-        return $this->hasMany(InternalDetail::class,'transaction_id');
+        return $this->hasMany(InternalDetail::class,'id_usulan','id');
     }
+
+    public function dosen(){
+        return $this->belongsTo(Dosen::class, 'nidn_dosen','nidn_dosen');
+    }
+    public function rekening(){
+        return $this->belongsTo(Rekening::class, 'id_rekening','id');
+    }
+    public function usulanMahasiswa()
+    {
+        return $this->belongsTo(UsulanMahasiswa::class, 'id_usulan_mahasiswa','id');
+    }
+       
+       
+
 
 }

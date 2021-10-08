@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Admin;
 
 use App\Models\Admin\Dosen;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,9 +22,9 @@ class DosenFactory extends Factory
     public function definition()
     {
         return [
-            'nidn_dosen'=>$this->faker->  nidn_dosen,
-            'nama_dosen'=>$this->faker->nama_dosen,
-            'no_hp'=>$this->faker->no_hp
+            'nidn_dosen'=>$this->faker-> numberBetween(16111111,21811111),
+            'nama_dosen'=>$this->faker->name(),
+            'no_hp'=>$this->faker->numerify('##########')
         ];
     }
 }

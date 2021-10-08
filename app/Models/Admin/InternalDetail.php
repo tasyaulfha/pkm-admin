@@ -8,19 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class InternalDetail extends Model
 {
     use HasFactory;
-    
+    protected $table = "internal_details";
+    protected  $primaryKey="id";
+
     protected $fillable =[
-       'id_internal','name','jurusan','fakultas', 'no_hp'
+       'id_usulan'
         
        ];
-       public function internal(){
-           return $this->belongsTo(Internal::class, 'id_internal','id');
+
+       public function usulan(){
+           return $this->belongsTo(Usulan::class, 'id_usulan','id');
        }
-       public function usulanMahasiswas()
-       {
-           return $this->hasMany(UsulanMahasiswa::class, 'id_usulan');
-       }
+     
        
+    
       
 
 }

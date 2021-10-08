@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InternalRequest extends FormRequest
+class IdeaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class InternalRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,6 +25,7 @@ class InternalRequest extends FormRequest
     {
         return [
             'status_usulan' => 'required|string|in:TERKIRIM,PROSES REVIEW, DITERIMA'
+
         ];
     }
 }

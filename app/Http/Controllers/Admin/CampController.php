@@ -66,7 +66,7 @@ class CampController extends Controller
     public function show($id)
     {
         $item = Usulan::with([
-            'details', 'user'
+            'details', 'user','rekening','dosen','usulan'
         ])->findOrFail($id);
         
         return view('pages.admin.usulan.camp.detail',[

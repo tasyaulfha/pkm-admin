@@ -3,19 +3,18 @@
 
 @section('content')
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid p-4">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">PKM CAMP</h1>
-       
-    </div>
+    <h5 class="mb-3 font-weight-bold" style="color: #093697">
+        PKM Camp
+    </h5>
 
-
-    <div class="row">
+    <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table id="camp_table" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -76,7 +75,13 @@
 
 
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" defer></script>
+<script>
+    $(document).ready( function () {
+        $('#camp_table').DataTable();
+    } );
+</script>
 
 @endsection
 

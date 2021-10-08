@@ -5,25 +5,28 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UsulanMahasiswa extends Model
+class Rekening extends Model
 {
     use HasFactory;
 
-    protected $table = 'usulan_mahasiswas';
+    protected $table = 'rekening';
     public $timestamps = true;
 
     protected $fillable = [
         'id_user',
-        'id_usulan',
-        'member'
+        'bank',
+        'no_hp',
+        'no_rek',
+        'an_rek',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user', 'id');
     }
-
-    public function usulan(){
+    public function Usulan()
+    {
         return $this->hasOne(Usulan::class, 'id_usulan', 'id');
     }
+    
 }
