@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Usulan;
-use Illuminate\Http\Request;
 
 
 class DashboardController extends Controller
@@ -13,12 +12,18 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(Request $request){
+    public function index(){
         $usulan = Usulan::count();
-        
+        $internal =Usulan::where('type','Seleksi Internal')->count();
+        $camp =Usulan::where('type','PKM Camp')->count();
+        $idea =Usulan::where('type','PKM Idea Challange')->count();
+
 
         return view('pages.admin.dashboard')->with([
-            'usulan'=>$usulan,
+            'usulan'=> $usulan,
+            'internal'=>$internal,
+            'camp'=>$camp,
+            'idea'=>$idea,
         ]);
     }
 }
