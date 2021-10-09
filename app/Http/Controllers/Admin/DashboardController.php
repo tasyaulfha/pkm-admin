@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Usulan;
 use Illuminate\Http\Request;
+
 
 class DashboardController extends Controller
 {
@@ -12,6 +14,11 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
     public function index(Request $request){
-        return view('pages.admin.dashboard');
+        $usulan = Usulan::count();
+        
+
+        return view('pages.admin.dashboard')->with([
+            'usulan'=>$usulan,
+        ]);
     }
 }

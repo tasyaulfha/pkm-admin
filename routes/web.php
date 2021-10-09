@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\IdeaController;
 use App\Http\Controllers\Admin\InternalController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

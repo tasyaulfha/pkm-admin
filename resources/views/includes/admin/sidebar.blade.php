@@ -55,7 +55,7 @@
         <a class="nav-link" href="{{route('dosen.index')}}">
             <i class="fa fa-list-alt" aria-hidden="true"></i>
             <span>Data Dosen</span></a>
-            </ul>
+        </ul>
 
         </div>
 
