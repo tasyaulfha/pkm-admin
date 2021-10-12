@@ -16,6 +16,7 @@ class CreateSkemasTable extends Migration
         Schema::create('skemas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('skema');
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

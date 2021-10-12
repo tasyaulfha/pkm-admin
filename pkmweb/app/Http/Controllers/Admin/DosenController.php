@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\DosenRequest;
 use App\Models\Admin\Dosen;
-
+use App\Exports\DosenExport;
+use App\Imports\DosenImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\Admin\DosenRequest;
 
 
 class DosenController extends Controller
@@ -24,18 +26,19 @@ class DosenController extends Controller
 
     }
 
-    // public function dosenexport(){
-    //     return Excel::download(new DosenExport,'dosen.xlsx');
-    // }
-    // public function dosenimport(DosenRequest $request){
-    //    $file= $request->file('file');
-    //    $namafile=$file->getClientOriginalName();
-    //    $file->move('DataDosen', $namafile);
+    public function dosenexport(){
+        return Excel::download(new DosenExport,'dosen.xlsx');
+    }
+    public function dosenimport(DosenRequest $request){
+       $file= $request->file('file');
+       $namafile=$file->getClientOriginalName();
+       $file->move('DataDosen', $namafile);
 
-    //    Excel::import(new DosenImport, public_path('/DataDosen/'.$namafile));
-    //    return redirect('/index'); 
+       Excel::import(new DosenImport, public_path('/DataDosen/'.$namafile));
+       return redirect()->route('dosen.index');  
 
-    // }
+
+    }
 
     /**
      * Show the form for creating a new resource.

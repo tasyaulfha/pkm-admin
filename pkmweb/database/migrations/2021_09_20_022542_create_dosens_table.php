@@ -15,9 +15,10 @@ class CreateDosensTable extends Migration
     {
         Schema::create('dosens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('nidn_dosen')->nullable();
+            $table->foreignId('nidn_dosen')->nullable();
             $table->string('nama_dosen')->nullable();
             $table->string('no_hp')->nullable();
+            $table->string('slug')->nullable();
 
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
